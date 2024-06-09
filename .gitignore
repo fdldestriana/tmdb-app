@@ -44,3 +44,4 @@ app.*.map.json
 
 # Note while developing
 tmdb_features
+.env

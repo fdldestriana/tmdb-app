@@ -1,0 +1,62 @@
+import 'package:tmdb_app/features/home/domain/entities/movie_latest_entity.dart';
+
+class MovieLatestModel extends MovieLatestEntity {
+  MovieLatestModel(
+      {required super.adult,
+      required super.backdropPath,
+      required super.belongsToCollection,
+      required super.budget,
+      required super.genres,
+      required super.homepage,
+      required super.id,
+      required super.imdbId,
+      required super.originCountry,
+      required super.originalLanguage,
+      required super.originalTitle,
+      required super.overview,
+      required super.popularity,
+      required super.posterPath,
+      required super.productionCompanies,
+      required super.productionCountries,
+      required super.releaseDate,
+      required super.revenue,
+      required super.runtime,
+      required super.spokenLanguages,
+      required super.status,
+      required super.tagline,
+      required super.title,
+      required super.video,
+      required super.voteAverage,
+      required super.voteCount});
+
+  factory MovieLatestModel.fromJson(Map<String, dynamic> json) {
+    return MovieLatestModel(
+      adult: json['adult'],
+      backdropPath: json['backdrop_path'],
+      belongsToCollection: json['belongs_to_collection'],
+      budget: json['budget'],
+      genres: json['genres'],
+      homepage: json['homepage'],
+      id: json['id'],
+      imdbId: json['imdb_id'],
+      originCountry: List<String>.from(json['origin_country']),
+      originalLanguage: json['original_language'],
+      originalTitle: json['original_title'],
+      overview: json['overview'],
+      popularity: json['popularity'],
+      posterPath: json['poster_path'],
+      productionCompanies: json['production_companies'],
+      productionCountries: json['production_countries'],
+      releaseDate: json['release_date'],
+      revenue: json['revenue'],
+      runtime: json['runtime'],
+      spokenLanguages: json['spoken_languages'],
+      status: json['status'],
+      tagline: json['tagline'],
+      title: json['title'],
+      video: json['video'],
+      voteAverage: json['vote_average'],
+      voteCount: json['vote_count'],
+    );
+  }
+}
