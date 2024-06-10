@@ -20,7 +20,7 @@ class MovieTopRatedModel extends MovieTopRatedEntity {
   factory MovieTopRatedModel.fromJson(Map<String, dynamic> json) {
     return MovieTopRatedModel(
       adult: json["adult"],
-      backdropPath: json["backdropPath"],
+      backdropPath: json["backdrop_path"],
       id: json["id"],
       originalLanguage: json["originalLanguage"],
       originalTitle: json["originalTitle"],
@@ -30,7 +30,7 @@ class MovieTopRatedModel extends MovieTopRatedEntity {
       releaseDate: json["releaseDate"],
       title: json["title"],
       video: json["video"],
-      voteAverage: json["voteAverage"],
+      voteAverage: json["vote_average"],
       voteCount: json["voteCount"],
       genreIds: json["genreIds"],
     );
@@ -38,7 +38,7 @@ class MovieTopRatedModel extends MovieTopRatedEntity {
   Map<String, dynamic> toJson() {
     return {
       "adult": adult,
-      "backdropPath": backdropPath,
+      "backdrop_path": backdropPath,
       "id": id,
       "originalLanguage": originalLanguage,
       "originalTitle": originalTitle,
@@ -48,7 +48,7 @@ class MovieTopRatedModel extends MovieTopRatedEntity {
       "releaseDate": releaseDate,
       "title": title,
       "video": video,
-      "voteAverage": voteAverage,
+      "vote_average": voteAverage,
       "voteCount": voteCount,
     };
   }
