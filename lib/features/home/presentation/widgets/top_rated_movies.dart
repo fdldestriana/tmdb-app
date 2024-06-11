@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tmdb_app/core/constants/app_constants.dart';
 import 'package:tmdb_app/features/home/presentation/bloc/topratedmovies/topratedmovies_state.dart';
+import 'package:tmdb_app/features/home/presentation/widgets/bookmark_button.dart';
 
 class TopRatedMovies extends StatelessWidget {
   const TopRatedMovies({super.key, required this.state});
@@ -14,23 +15,38 @@ class TopRatedMovies extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text.rich(
-            TextSpan(
-              children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text.rich(
                 TextSpan(
-                  text: AppConstants.topFive,
-                  style:
-                      TextStyle(fontSize: 30.sp, fontWeight: FontWeight.bold),
+                  children: [
+                    TextSpan(
+                      text: AppConstants.topFive,
+                      style: TextStyle(
+                          fontSize: 30.sp, fontWeight: FontWeight.bold),
+                    ),
+                    TextSpan(
+                      text: '.',
+                      style: TextStyle(
+                          color: const Color(0xFFFFC700),
+                          fontSize: 30.sp,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ],
                 ),
-                TextSpan(
-                  text: '.',
+              ),
+              TextButton(
+                onPressed: () {},
+                child: Text(
+                  AppConstants.seeMore,
                   style: TextStyle(
-                      color: const Color(0xFFFFC700),
-                      fontSize: 30.sp,
-                      fontWeight: FontWeight.bold),
+                    color: const Color(0xFFFFC700),
+                    fontSize: 16.sp,
+                  ),
                 ),
-              ],
-            ),
+              )
+            ],
           ),
           SizedBox(
             height: 0.02.sh,
@@ -51,18 +67,43 @@ class TopRatedMovies extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(0.04.sw),
-                        child: Image.network(
-                            height: 0.25.sh,
-                            width: 0.80.sw,
-                            fit: BoxFit.fill,
-                            "${AppConstants.imageBaseUrl}${state.topRatedMovies[index].backdropPath}"),
+                      Stack(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(0.04.sw),
+                            child: Image.network(
+                                height: 0.25.sh,
+                                width: 0.80.sw,
+                                fit: BoxFit.fill, loadingBuilder:
+                                    (context, child, loadingProgress) {
+                              if (loadingProgress != null) {
+                                return Container(
+                                  color: Colors.teal,
+                                  height: 0.25.sh,
+                                  width: 0.80.sw,
+                                );
+                              }
+                              return child;
+                            }, "${AppConstants.imageBaseUrl}${state.topRatedMovies[index].backdropPath}"),
+                          ),
+                          Positioned(
+                            right: 0.04.sw,
+                            top: 0.02.sh,
+                            child: const BookmarkButton(),
+                          )
+                        ],
                       ),
-                      Text("${state.topRatedMovies[index].title}"),
+                      Text(
+                        "${state.topRatedMovies[index].title}",
+                        style: TextStyle(
+                            fontSize: 20.sp, fontWeight: FontWeight.bold),
+                      ),
                       Row(
                         children: [
-                          Text("${state.topRatedMovies[index].voteAverage}"),
+                          Text(
+                            "${state.topRatedMovies[index].voteAverage}",
+                            style: TextStyle(fontSize: 20.sp),
+                          ),
                         ],
                       )
                     ],

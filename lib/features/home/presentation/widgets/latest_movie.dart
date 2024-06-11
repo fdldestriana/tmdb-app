@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tmdb_app/core/constants/app_constants.dart';
 import 'package:tmdb_app/features/home/presentation/bloc/latestmovies/latestmovies_state.dart';
+import 'package:tmdb_app/features/home/presentation/widgets/bookmark_button.dart';
 
 class LatestMovie extends StatelessWidget {
   const LatestMovie({super.key, required this.state});
@@ -22,39 +23,25 @@ class LatestMovie extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 0.04.sw),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text.rich(
+          Text.rich(
+            TextSpan(
+              children: [
                 TextSpan(
-                  children: [
-                    TextSpan(
-                      text: AppConstants.latest,
-                      style: TextStyle(
-                          fontSize: 30.sp, fontWeight: FontWeight.bold),
-                    ),
-                    TextSpan(
-                      text: '.',
-                      style: TextStyle(
-                          color: const Color(0xFFFFC700),
-                          fontSize: 30.sp,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ],
+                  text: AppConstants.latest,
+                  style:
+                      TextStyle(fontSize: 30.sp, fontWeight: FontWeight.bold),
                 ),
-              ),
-              TextButton(
-                onPressed: () {},
-                child: Text(
-                  AppConstants.seeMore,
+                TextSpan(
+                  text: '.',
                   style: TextStyle(
-                    color: const Color(0xFFFFC700),
-                    fontSize: 16.sp,
-                  ),
+                      color: const Color(0xFFFFC700),
+                      fontSize: 30.sp,
+                      fontWeight: FontWeight.bold),
                 ),
-              )
-            ],
+              ],
+            ),
           ),
           SizedBox(
             height: 0.02.sh,
@@ -63,21 +50,37 @@ class LatestMovie extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               (state.latestMovies.first.backdropPath == null)
-                  ? Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(0.04.sw),
-                        color: Colors.teal,
+                  ? Stack(children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(0.04.sw),
+                          color: Colors.teal,
+                        ),
+                        height: 0.34.sh,
+                        width: 0.49.sw,
                       ),
-                      height: 0.34.sh,
-                      width: 0.49.sw,
-                    )
-                  : ClipRRect(
-                      borderRadius: BorderRadius.circular(0.04.sw),
-                      child: Image.network(
-                          fit: BoxFit.fitHeight,
-                          height: 0.34.sh,
-                          width: 0.49.sw,
-                          "${AppConstants.imageBaseUrl}${state.latestMovies.first.backdropPath}"),
+                      Positioned(
+                        right: 0.04.sw,
+                        top: 0.02.sh,
+                        child: const BookmarkButton(),
+                      )
+                    ])
+                  : Stack(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(0.04.sw),
+                          child: Image.network(
+                              fit: BoxFit.fitHeight,
+                              height: 0.34.sh,
+                              width: 0.49.sw,
+                              "${AppConstants.imageBaseUrl}${state.latestMovies.first.backdropPath}"),
+                        ),
+                        Positioned(
+                          right: 0.04.sw,
+                          top: 0.02.sh,
+                          child: const BookmarkButton(),
+                        )
+                      ],
                     ),
               SizedBox(width: 0.05.sw),
               Expanded(
