@@ -57,7 +57,10 @@ class _HomeBodyState extends State<HomeBody> {
               builder: (context, state) {
                 if (state is GetTopRatedMoviesInitial ||
                     state is GetTopRatedMoviesLoading) {
-                  return const Center(child: CircularProgressIndicator());
+                  return SizedBox(
+                      height: 0.50.sh,
+                      width: 0.50.sw,
+                      child: const Center(child: CircularProgressIndicator()));
                 }
                 if (state is GetTopRatedMoviesError) {
                   return Center(child: Text(state.toString()));
@@ -70,7 +73,10 @@ class _HomeBodyState extends State<HomeBody> {
               builder: (context, state) {
                 if (state is GetLatestMoviesInitial ||
                     state is GetLatestMoviesLoading) {
-                  return const Center(child: CircularProgressIndicator());
+                  return SizedBox(
+                      height: 0.50.sh,
+                      width: 0.50.sw,
+                      child: const Center(child: CircularProgressIndicator()));
                 }
                 if (state is GetLatestMoviesError) {
                   return Center(child: Text(state.toString()));

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:tmdb_app/core/theme/app_theme_data.dart';
 import 'package:tmdb_app/features/home/presentation/pages/home_page.dart';
 import 'core/injection_container.dart' as di;
 
@@ -17,10 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      theme: AppThemeData.darkTheme,
       home: const HomePage(),
     );
   }

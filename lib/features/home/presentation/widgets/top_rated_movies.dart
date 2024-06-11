@@ -14,12 +14,26 @@ class TopRatedMovies extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            AppConstants.topFive,
-            style: TextStyle(
-              fontSize: 30.sp,
-              fontWeight: FontWeight.bold,
+          Text.rich(
+            TextSpan(
+              children: [
+                TextSpan(
+                  text: AppConstants.topFive,
+                  style:
+                      TextStyle(fontSize: 30.sp, fontWeight: FontWeight.bold),
+                ),
+                TextSpan(
+                  text: '.',
+                  style: TextStyle(
+                      color: const Color(0xFFFFC700),
+                      fontSize: 30.sp,
+                      fontWeight: FontWeight.bold),
+                ),
+              ],
             ),
+          ),
+          SizedBox(
+            height: 0.02.sh,
           ),
           SizedBox(
             height: 0.33.sh,
@@ -37,14 +51,11 @@ class TopRatedMovies extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(0.04.sw),
-                        ),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(0.04.sw),
                         child: Image.network(
                             height: 0.25.sh,
                             width: 0.80.sw,
-                            // color: Colors.teal,
                             fit: BoxFit.fill,
                             "${AppConstants.imageBaseUrl}${state.topRatedMovies[index].backdropPath}"),
                       ),

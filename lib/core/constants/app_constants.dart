@@ -15,7 +15,7 @@ class AppConstants {
   static const String imageBaseUrl = "https://image.tmdb.org/t/p/original";
 
   // constant strings
-  static const String topFive = "Top Five.";
-  static const String latest = "Latest.";
+  static const String topFive = "Top Five";
+  static const String latest = "Latest";
   static const String seeMore = "SEE MORE";
 }
