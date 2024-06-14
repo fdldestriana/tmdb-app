@@ -1,7 +1,7 @@
-import 'package:tmdb_app/features/home/domain/entities/movie_top_rated_entity.dart';
+import 'package:tmdb_app/core/entities/movie_entity.dart';
 
-class MovieTopRatedModel extends MovieTopRatedEntity {
-  MovieTopRatedModel(
+class MovieModel extends MovieEntity {
+  MovieModel(
       {required super.adult,
       required super.backdropPath,
       required super.id,
@@ -17,8 +17,8 @@ class MovieTopRatedModel extends MovieTopRatedEntity {
       required super.voteCount,
       required super.genreIds});
 
-  factory MovieTopRatedModel.fromJson(Map<String, dynamic> json) {
-    return MovieTopRatedModel(
+  factory MovieModel.fromJson(Map<String, dynamic> json) {
+    return MovieModel(
       adult: json["adult"],
       backdropPath: json["backdrop_path"],
       id: json["id"],

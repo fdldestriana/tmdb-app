@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:tmdb_app/features/home/domain/entities/movie_top_rated_entity.dart';
+import 'package:tmdb_app/core/entities/movie_entity.dart';
 
 abstract class TopRatedMoviesState extends Equatable {
   @override
@@ -11,7 +11,7 @@ class GetTopRatedMoviesInitial extends TopRatedMoviesState {}
 class GetTopRatedMoviesLoading extends TopRatedMoviesState {}
 
 class GetTopRatedMoviesLoaded extends TopRatedMoviesState {
-  final List<MovieTopRatedEntity> topRatedMovies;
+  final List<MovieEntity> topRatedMovies;
   GetTopRatedMoviesLoaded({required this.topRatedMovies});
 }
 

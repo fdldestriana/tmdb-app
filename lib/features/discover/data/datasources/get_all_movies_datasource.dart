@@ -1,20 +1,18 @@
 import 'dart:developer';
-
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:tmdb_app/core/constants/app_constants.dart';
 import 'package:tmdb_app/core/data/models/movie_model.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-abstract class GetTopRatedMoviesDatasource {
-  Future<List<MovieModel>> getTopRatedMovies();
+abstract class GetAllMoviesDatasource {
+  Future<List<MovieModel>> getAllMovies();
 }
 
-class GetTopRatedMoviesDatasourceImpl implements GetTopRatedMoviesDatasource {
+class GetAllMovieDatasourceImpl implements GetAllMoviesDatasource {
   final Dio dio = Dio();
-  List<MovieModel> topRatedMovies = [];
-
+  List<MovieModel> allMovies = [];
   @override
-  Future<List<MovieModel>> getTopRatedMovies() async {
+  Future<List<MovieModel>> getAllMovies() async {
     // adding API KEY within the request
     dio.interceptors.add(
       InterceptorsWrapper(
@@ -26,14 +24,14 @@ class GetTopRatedMoviesDatasourceImpl implements GetTopRatedMoviesDatasource {
     );
 
     try {
-      final Response response = await dio.get(AppConstants.topRatedMoviesUrl);
+      final Response response = await dio.get(AppConstants.allMoviesUrl);
       if (response.statusCode == 200) {
         List<dynamic> movies = response.data["results"] as List<dynamic>;
         for (Map<String, dynamic> movie in movies) {
-          topRatedMovies.add(MovieModel.fromJson(movie));
+          allMovies.add(MovieModel.fromJson(movie));
         }
       }
-      return topRatedMovies;
+      return allMovies;
     } on Exception catch (e) {
       log("ERROR GET TOP RATED ${e.toString()}");
       rethrow;
