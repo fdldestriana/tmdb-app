@@ -18,4 +18,5 @@ class AppConstants {
   static const String topFive = "Top Five";
   static const String latest = "Latest";
   static const String seeMore = "SEE MORE";
+  static const String discover = "Discover";
 }

@@ -109,8 +109,6 @@ class TopRatedMovies extends StatelessWidget {
                     ],
                   ),
                 );
-                // Text(
-                //     state.topRatedMovies[index].title ?? "Title");
               },
               separatorBuilder: (context, index) {
                 return SizedBox(width: 0.05.sw);

@@ -9,7 +9,7 @@ import 'package:bloc/bloc.dart';
 class LatestMoviesBloc extends Bloc<LatestMoviesEvent, LatestMoviesState> {
   final GetLatestMoviesUseCase useCase;
   LatestMoviesBloc({required this.useCase}) : super(GetLatestMoviesInitial()) {
-    on<GetLatestMoviesEvent>(
+    on<LatestMoviesEvent>(
       (event, emit) async {
         emit(GetLatestMoviesLoading());
         Either<Failure, List<MovieLatestEntity>> latestMovies =
