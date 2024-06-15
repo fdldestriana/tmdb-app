@@ -3,9 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tmdb_app/core/constants/app_constants.dart';
 import 'package:tmdb_app/core/injection_container.dart';
-import 'package:tmdb_app/features/discover/presentation/bloc/all_movies_bloc.dart';
-import 'package:tmdb_app/features/discover/presentation/bloc/all_movies_event.dart';
-import 'package:tmdb_app/features/discover/presentation/bloc/all_movies_state.dart';
+import 'package:tmdb_app/features/discover/presentation/bloc/allgenres/allgenres_bloc.dart';
+import 'package:tmdb_app/features/discover/presentation/bloc/allgenres/allgenres_event.dart';
+import 'package:tmdb_app/features/discover/presentation/bloc/allgenres/allgenres_state.dart';
+import 'package:tmdb_app/features/discover/presentation/bloc/allmovies/all_movies_bloc.dart';
+import 'package:tmdb_app/features/discover/presentation/bloc/allmovies/all_movies_event.dart';
+import 'package:tmdb_app/features/discover/presentation/bloc/allmovies/all_movies_state.dart';
 import 'package:tmdb_app/features/home/presentation/widgets/bookmark_button.dart';
 
 class DiscoverPage extends StatelessWidget {
@@ -13,28 +16,32 @@ class DiscoverPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => sl<AllMoviesBloc>(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => sl<AllMoviesBloc>()),
+        BlocProvider(create: (_) => sl<AllGenresBloc>())
+      ],
       child: Scaffold(
         appBar: AppBar(),
-        body: const HomeBody(),
+        body: const DiscoverBody(),
       ),
     );
   }
 }
 
-class HomeBody extends StatefulWidget {
-  const HomeBody({super.key});
+class DiscoverBody extends StatefulWidget {
+  const DiscoverBody({super.key});
 
   @override
-  State<HomeBody> createState() => _HomeBodyState();
+  State<DiscoverBody> createState() => _DiscoverBodyState();
 }
 
-class _HomeBodyState extends State<HomeBody> {
+class _DiscoverBodyState extends State<DiscoverBody> {
   @override
   void initState() {
     super.initState();
     BlocProvider.of<AllMoviesBloc>(context).add(GetAllMoviesEvent());
+    BlocProvider.of<AllGenresBloc>(context).add(GetAllGenresEvent());
   }
 
   @override
@@ -90,6 +97,10 @@ class AllMovies extends StatelessWidget {
                 ],
               ),
             ),
+            SizedBox(
+              height: 0.01.sh,
+            ),
+            const AllGenres(),
             SizedBox(
               height: 0.02.sh,
             ),
@@ -167,5 +178,44 @@ class AllMovies extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class AllGenres extends StatelessWidget {
+  const AllGenres({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<AllGenresBloc, AllGenresState>(
+        builder: (context, state) {
+      if (state is GetAllGenresLoading) {
+        return Container();
+      }
+      state as GetAllGenresLoaded;
+      return SizedBox(
+        height: 0.03.sh,
+        child: ListView.separated(
+          itemBuilder: (context, index) {
+            return FittedBox(
+                fit: BoxFit.fitWidth,
+                child: Container(
+                    decoration: BoxDecoration(
+                        color: const Color(0xFF2A2A2A),
+                        borderRadius: BorderRadius.circular(0.07.sw)),
+                    child: Text(state.allGenres[index].name)));
+          },
+          itemCount: state.allGenres.length,
+          separatorBuilder: (context, index) {
+            return SizedBox(
+              width: 0.03.sw,
+            );
+          },
+          scrollDirection: Axis.horizontal,
+          shrinkWrap: true,
+        ),
+      );
+    });
   }
 }

@@ -56,16 +56,6 @@ class MovieLatestEntity {
   });
 }
 
-class Genre {
-  int id;
-  String name;
-
-  Genre({
-    required this.id,
-    required this.name,
-  });
-}
-
 class SpokenLanguage {
   String englishName;
   String iso6391;

@@ -3,8 +3,8 @@ import 'package:dartz/dartz.dart';
 import 'package:tmdb_app/core/entities/movie_entity.dart';
 import 'package:tmdb_app/core/error/failures.dart';
 import 'package:tmdb_app/features/discover/domain/usecases/get_all_movies_usecase.dart';
-import 'package:tmdb_app/features/discover/presentation/bloc/all_movies_event.dart';
-import 'package:tmdb_app/features/discover/presentation/bloc/all_movies_state.dart';
+import 'package:tmdb_app/features/discover/presentation/bloc/allmovies/all_movies_event.dart';
+import 'package:tmdb_app/features/discover/presentation/bloc/allmovies/all_movies_state.dart';
 
 class AllMoviesBloc extends Bloc<AllMoviesEvent, AllMoviesState> {
   GetAllMoviesUsecase useCase;

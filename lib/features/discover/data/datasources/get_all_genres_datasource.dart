@@ -2,17 +2,17 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:tmdb_app/core/constants/app_constants.dart';
-import 'package:tmdb_app/core/data/models/movie_model.dart';
+import 'package:tmdb_app/core/data/models/genre_model.dart';
 
-abstract class GetAllMoviesDatasource {
-  Future<List<MovieModel>> getAllMovies();
+abstract class GetAllGenresDatasource {
+  Future<List<GenreModel>> getAllGenres();
 }
 
-class GetAllMoviesDatasourceImpl implements GetAllMoviesDatasource {
+class GetAllGenresDatasourceImpl implements GetAllGenresDatasource {
   final Dio dio = Dio();
-  List<MovieModel> allMovies = [];
+  List<GenreModel> allGenres = [];
   @override
-  Future<List<MovieModel>> getAllMovies() async {
+  Future<List<GenreModel>> getAllGenres() async {
     // adding API KEY within the request
     dio.interceptors.add(
       InterceptorsWrapper(
@@ -22,18 +22,17 @@ class GetAllMoviesDatasourceImpl implements GetAllMoviesDatasource {
         },
       ),
     );
-
     try {
-      final Response response = await dio.get(AppConstants.allMoviesUrl);
+      final Response response = await dio.get(AppConstants.allMovieGenresUrl);
       if (response.statusCode == 200) {
-        List<dynamic> movies = response.data["results"] as List<dynamic>;
+        List<dynamic> movies = response.data["genres"] as List<dynamic>;
         for (Map<String, dynamic> movie in movies) {
-          allMovies.add(MovieModel.fromJson(movie));
+          allGenres.add(GenreModel.fromJson(movie));
         }
       }
-      return allMovies;
+      return allGenres;
     } on Exception catch (e) {
-      log("ERROR GET ALL MOVIES ${e.toString()}");
+      log("ERROR GET ALL GENRES ${e.toString()}");
       rethrow;
     }
   }
