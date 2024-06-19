@@ -52,4 +52,23 @@ class MovieModel extends MovieEntity {
       "voteCount": voteCount,
     };
   }
+
+  factory MovieModel.fromEntity(MovieEntity movieEntity) {
+    return MovieModel(
+      adult: movieEntity.adult,
+      backdropPath: movieEntity.backdropPath,
+      id: movieEntity.id,
+      originalLanguage: movieEntity.originalLanguage,
+      originalTitle: movieEntity.originalTitle,
+      overview: movieEntity.overview,
+      popularity: movieEntity.popularity,
+      posterPath: movieEntity.posterPath,
+      releaseDate: movieEntity.releaseDate,
+      title: movieEntity.title,
+      video: movieEntity.video,
+      voteAverage: movieEntity.voteAverage,
+      voteCount: movieEntity.voteCount,
+      genreIds: movieEntity.genreIds,
+    );
+  }
 }

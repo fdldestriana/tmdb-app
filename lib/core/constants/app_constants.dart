@@ -11,6 +11,11 @@ class AppConstants {
   static const String movieDetailUrl =
       "https://api.themoviedb.org/3/movie/{movie_id}";
 
+  // method for parameterized string
+  static String getSimilarMovieBasedOnGenreUrl(int movieId) {
+    return "https://api.themoviedb.org/3/movie/$movieId/similar";
+  }
+
   // image base url
   static const String imageBaseUrl = "https://image.tmdb.org/t/p/original";
 
